@@ -1,7 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { data } from "./contents";
-import { motion } from "framer-motion";
+import { data } from "../../Components/OurServices/contents";
+
+const Section = styled.div`
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-bottom: 96px;
+  box-sizing: border-box;
+  @media screen and (max-width: 768px) {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 56px;
+  }
+`;
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -19,12 +30,14 @@ const Row = styled.div`
   box-sizing: border-box;
   width: 100%;
   max-width: 100%;
+  padding-bottom: 80px;
 `;
 
 const Col7 = styled.div`
   flex: 0 0 calc((7 / 12) * 100% - (40px * (5 / 12)));
   max-width: calc((7 / 12) * 100% - (40px * (5 / 12)));
   box-sizing: border-box;
+  // padding: 40px;
   display: block;
   @media screen and (max-width: 768px) {
     flex-basis: 100%;
@@ -75,7 +88,7 @@ const SubHeading = styled.div`
   }
 `;
 
-const Paragraph = styled(motion.p)`
+const Paragraph = styled.p`
   font-size: 18px;
   font-weight: 400;
   padding: 0;
@@ -86,7 +99,7 @@ const Paragraph = styled(motion.p)`
   }
 `;
 
-const ImageDiv = styled(motion.div)`
+const ImageDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,51 +114,43 @@ const ImageDiv = styled(motion.div)`
   }
 `;
 
-const OurServices = () => {
-  const [currentRow, setCurrentRow] = useState(0);
+const OurServicesPage = () => {
+//   const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (currentRow < 5) {
-        const scrollPosition = window.scrollY;
-        // const windowHeight = window.innerHeight;
-        const totalHeight = document.body.scrollHeight;
-        const maxRows = data.length;
-        const rowHeight = totalHeight / maxRows;
+//   const handleScroll = (e) => {
+//     const container = e.target;
+//     const scrollPosition = container.scrollLeft;
+//     const itemWidth = container.offsetWidth;
 
-        // Calculate the current row based on scroll position
-        const currentRow = Math.floor(scrollPosition / rowHeight);
-        setCurrentRow(currentRow);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [currentRow]);
+//     const newIndex = Math.floor(scrollPosition / itemWidth);
+//     setCurrentIndex(newIndex);
+//   };
 
   return (
+    <Section>
     <Container>
-      {data.map((item, index) => (
-        <Row key={index} style={{ display: currentRow === item.id ? "flex" : "none" }}>
-          <Col5>
-            <Heading>{"OUR SERVICES"}</Heading>
-            <Indicator>{`0${item.id}/05`}</Indicator>
-          </Col5>
-          <Col7>
-            <ImageDiv color={item.bgcolor}>{item.image}</ImageDiv>
-            <SubHeading>{item.heading}</SubHeading>
-            <Paragraph>
-              {item.paragrapgh.map((para, paraIndex) => (
-                <p key={paraIndex}>{para}</p>
-              ))}
-            </Paragraph>
-          </Col7>
-        </Row>
-      ))}
+    <Heading>{"OUR SERVICES"}</Heading>
+        {data.map((item, index) => (
+          <Row key={index}>
+            <Col5>
+              <Indicator>
+              {`0${index + 1}/05`}
+              </Indicator>
+            </Col5>
+            <Col7>
+              <ImageDiv color={item.bgcolor}>{item.image}</ImageDiv>
+              <SubHeading>{item.heading}</SubHeading>
+              <Paragraph>
+                {item.paragrapgh.map((para, paraIndex) => (
+                  <p key={paraIndex}>{para}</p>
+                ))}
+              </Paragraph>
+            </Col7>
+          </Row>
+        ))}
     </Container>
+    </Section>
   );
 };
 
-export default OurServices;
+export default OurServicesPage;

@@ -1,8 +1,6 @@
-import React from "react";
+import React, { lazy } from "react";
 import styled from "styled-components";
-import useInView from "../../Configurations/useInView";
 import HeroSection from "../../Components/HeroSection";
-import AboutSection from "../../Components/AboutSection";
 import OurServices from "../../Components/OurServices";
 import OurProducts from "../../Components/OurProducts";
 import ForWhomSection from "../../Components/ForWhomSection";
@@ -20,30 +18,27 @@ const Section = styled.div`
   }
 `;
 
-const LandingPage = () => {
-  const [heroRef, isHeroSectionInView] = useInView();
-  const [aboutRef, isAboutSectionInView] = useInView();
-  const [servicesRef, isOurServicesInView] = useInView();
-  const [productsRef, isOurProductsInView] = useInView();
-  const [forWhomRef, isForWhomSectionInView] = useInView();
-  const [missionRef, isOurMissionInView] = useInView();
+const AboutSection = lazy(() => import("../../Components/AboutSection"));
 
+const LandingPage = () => {
   return (
     <>
-      <Section ref={heroRef}>{isHeroSectionInView && <HeroSection />}</Section>
-      <Section ref={aboutRef}>
-        {isAboutSectionInView && <AboutSection />}
+      <Section>
+        <HeroSection />
       </Section>
-      <Section ref={servicesRef}>
-        {isOurServicesInView && <OurServices />}
+      <Section>
+        <AboutSection />
       </Section>
-      <Section ref={productsRef}>
-        {isOurProductsInView && <OurProducts />}
+      <Section>
+        <OurServices />
       </Section>
-      <Section ref={forWhomRef}>
-        {isForWhomSectionInView && <ForWhomSection />}
+      <Section>
+        <OurProducts />
       </Section>
-      <Section ref={missionRef}>{isOurMissionInView && <OurMission />}</Section>
+      <Section>
+        <ForWhomSection />
+      </Section>
+      <OurMission />
     </>
   );
 };

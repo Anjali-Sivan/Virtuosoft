@@ -9,11 +9,11 @@ import { motion } from 'framer-motion';
 const CenteredText = styled(motion.div)`
   color: #0E1014;
   text-align: center;
-  font-size: 77px;
+  font-size: 65px;
   font-style: normal;
   font-weight: 500;
   line-height: 80px;
-  letter-spacing: -2px;
+  letter-spacing: -1%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,8 +46,9 @@ const TextWithImage = styled.span`
 
 const ImagesRow = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 24px; 
+  align-items: flex-end;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -55,9 +56,37 @@ const ImagesRow = styled.div`
   }
 `;
 
-const StyledImages = styled(motion.img)`
+const StyledImages1 = styled(motion.img)`
+  width: 428px;
+  height: 280px;
+  max-width:100%;
+  max-height:100%;
+
+  @media screen and (max-width: 768px) {
+    width: 335px;
+    height: 218px;
+    max-width:100%;
+    max-height:100%;
+  }
+`;
+
+const StyledImages2 = styled(motion.img)`
   width: 520px;
-  height: 304px;
+  height: 351px;
+  max-width:100%;
+  max-height:100%;
+
+  @media screen and (max-width: 768px) {
+    width: 335px;
+    height: 218px;
+    max-width:100%;
+    max-height:100%;
+  }
+`;
+
+const StyledImages3 = styled(motion.img)`
+  width: 244px;
+  height: 175px;
   max-width:100%;
   max-height:100%;
 
@@ -94,9 +123,9 @@ const HeroSection = () => {
       </TextWithImage>
     </CenteredText>
     <ImagesRow>
-      <StyledImages variants={imageAnimation} src={image1} alt="Description for Image 1" />
-      <StyledImages variants={imageAnimation} src={image2} alt="Description for Image 2" />
-      <StyledImages variants={imageAnimation} src={image3} alt="Description for Image 3" className="hide-on-small" />
+      <StyledImages1 variants={imageAnimation} src={image1} alt="Description for Image 1" />
+      <StyledImages2 variants={imageAnimation} src={image2} alt="Description for Image 2" />
+      <StyledImages3 variants={imageAnimation} src={image3} alt="Description for Image 3" className="hide-on-small" />
     </ImagesRow>
     </>
   );

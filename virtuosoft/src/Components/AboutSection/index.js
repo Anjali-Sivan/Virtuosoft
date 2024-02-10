@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import image1 from '../../Assets/about-us-img-1.png';
-import image2 from '../../Assets/about us-img-2.png';
+import image1 from "../../Assets/about-us-img-1.png";
+import image2 from "../../Assets/about us-img-2.png";
 import { motion } from "framer-motion";
 
 const ContainerDiv = styled.div`
@@ -30,7 +30,7 @@ const Row = styled.div`
   }
 `;
 
-const Col = styled.div`
+const Col = styled(motion.div)`
   color: #0e1014;
   box-sizing: border-box;
 
@@ -52,7 +52,7 @@ const Col4 = styled(Col)`
 
 const Col6 = styled(Col)`
   flex: 0 0 50%;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 400;
   line-height: 56.2px;
 
@@ -78,45 +78,71 @@ const Button = styled.button`
 `;
 
 const ImageDiv = styled.div`
-display:flex;
-gap: 40px;
-box-sizing: border-box;
-padding-top: 70px;
-@media screen and (max-width: 768px) {
-  gap: 20px;
-  padding-top: 48px;
-}
+  display: flex;
+  gap: 40px;
+  box-sizing: border-box;
+  padding-top: 70px;
+  @media screen and (max-width: 768px) {
+    gap: 20px;
+    padding-top: 48px;
+  }
 `;
 
 const Image1 = styled(motion.img)`
-width : 385px;
-height : 296;
-@media screen and (max-width: 768px) {
-  width:182px;
-  height:140px;
-}
+  width: 385px;
+  height: 296;
+  @media screen and (max-width: 768px) {
+    width: 182px;
+    height: 140px;
+  }
 `;
 
 const Image2 = styled(motion.img)`
-width : 280px;
-height : 232px;
-@media screen and (max-width: 768px) {
-width : 134px;
-height : 110px;
-}
+  width: 280px;
+  height: 232px;
+  @media screen and (max-width: 768px) {
+    width: 134px;
+    height: 110px;
+  }
 `;
 
-const imageAnimation = {
-  initial: { opacity: 0, x: 60 },
-  animate: { opacity: 1, x: 0, transition: { duration: 1.5 } },
-};
-
 const AboutSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const element = document.getElementById("aboutSection");
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        setIsVisible(rect.top < window.innerHeight);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  
+
+  const textAnimation = {
+    initial: { opacity: 0, y: 60 },
+    animate: { opacity: 1, y: 0, transition: { duration: 1.5 } },
+  };
+
+  const imageAnimation = {
+    initial:{ x: 300, opacity: 0 },
+    animate:{ x: 0, opacity: 1 },
+    exit:{ x: -300, opacity: 0 }
+  };
+
   return (
-    <ContainerDiv>
+    <ContainerDiv id="aboutSection">
       <Row>
-        <Col4>WHO WE ARE</Col4>
-        <Col6>
+        <Col4 variants={textAnimation} initial="initial" animate={isVisible && "animate"}>
+          WHO WE ARE
+        </Col4>
+        <Col6 variants={textAnimation} initial="initial" animate={isVisible && "animate"}>
           <p>
             Our team comprises highly skilled professionals with extensive
             experience in supporting a wide range of applications across various
@@ -128,12 +154,11 @@ const AboutSection = () => {
             helping to achieve the business objectives.
           </p>
           <Button>{"More about us"}</Button>
-          <ImageDiv>
-            <Image1 variants={imageAnimation} src={image1} alt="about-us1"/>
-            <Image2 variants={imageAnimation} src={image2} alt="about-us2"/>
+          <ImageDiv id="aboutImage">
+            <Image1 variants={imageAnimation} src={image1} alt="about-us1" />
+            <Image2 variants={imageAnimation} src={image2} alt="about-us2" />
           </ImageDiv>
         </Col6>
- 
       </Row>
     </ContainerDiv>
   );

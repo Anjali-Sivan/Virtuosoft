@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { data } from "../../Components/OurProducts/contents";
-import product1 from "../../Assets/product1.png";
-import diagram from '../../Assets/diagram.png';
+import contactus from "../../Assets/contactus.png";
+import contactmap from "../../Assets/contactmap.png";
 
 const Section = styled.div`
   padding-left: 100px;
@@ -16,180 +15,254 @@ const Section = styled.div`
   }
 `;
 
-const Container = styled.div`
+const ContainerDiv = styled.div`
+  padding-top: 112px;
+  padding-bottom: 112px;
   box-sizing: border-box;
-  max-width: 100%;
-  padding-top: 100px;
+
   @media screen and (max-width: 768px) {
-    padding-top: 70px;
+    padding-top: 50px;
   }
 `;
 
 const Row = styled.div`
   display: flex;
-  flex-wrap: wrap;
   gap: 40px;
   box-sizing: border-box;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+`;
+
+const Col = styled.div`
+  color: #0e1014;
+  box-sizing: border-box;
+
+  @media screen and (max-width: 768px) {
+    flex-basis: 100%;
+  }
+`;
+
+const Col6 = styled(Col)`
+  flex: 0 0 50%;
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 56.2px;
+
+  @media screen and (max-width: 768px) {
+    flex-basis: 100%;
+  }
+`;
+
+const Col12 = styled(Col)`
+  flex: 0 0 100%;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  @media screen and (max-width: 768px) {
+    flex-basis: 100%;
+  }
+`;
+
+const Col4 = styled(Col)`
+  padding-top: 16px;
+  flex: 0 0 33.3333%;
+  color: #0e1014;
+  font-size: 21px;
+  line-height: 31px;
+  font-weight: 500;
+  @media screen and (max-width: 768px) {
+    flex-basis: 100%;
+    font-size: 11px;
+    line-height: 15px;
+  }
+`;
+
+const Col3 = styled(Col)`
+  padding-top: 16px;
+  flex: 0 0 25%;
+  color: #0e1014;
+  font-size: 21px;
+  line-height: 31px;
+  font-weight: 500;
+  @media screen and (max-width: 768px) {
+    flex-basis: 100%;
+    font-size: 11px;
+    line-height: 15px;
+  }
+`;
+
+// const Col1 = styled(Col)`
+//   flex: 0 0 8.3333%;
+//   @media screen and (max-width: 768px) {
+//     flex-basis: 100%;
+//   }
+// `;
+
+const Heading = styled.div`
+  font-size: 31px;
+  color: #0e1014;
+  line-height: 34px;
+  font-weight: 500;
+`;
+
+const InputField = styled.input`
+  background: #f2f2f2;
+  height: 56px;
+  border-radius: 8px;
+  padding: 16px;
+  box-sizing: border-box;
+  color: #0e1014;
+  font-size: 18px;
+  border: none;
   width: 100%;
-`;
+  font-family: "Inter", sans-serif; /* Set font family to Inter */
 
-const Col7 = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Col5 = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-`;
-
-const ResponsiveSVG = styled.div`
-  display: block;
-  max-width: 100%;
-  height: 100%;
-  svg {
-    width: 100%;
-    height: auto;
+  &::placeholder {
+    color: #0e1014; /* Change placeholder color */
   }
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    width: 100%;
-    height: auto;
+
+  @media screen and (min-width: 769px) {
+    flex-basis: calc(50% - 12px); /* half width with 24px gap in between */
   }
 `;
 
-const Heading = styled.h5`
-  font-size: 31px;
-  color: #000000;
-  @media screen and (max-width: 768px) {
-    font-size: 24px;
-  }
-`;
-
-const Heading1 = styled.h5`
-  font-size: 31px;
-  font-weight: 400;
-  padding: 0;
-  color: #000000;
-  @media screen and (max-width: 768px) {
-    font-size: 24px;
-  }
-`;
-
-const SubHeading = styled.p`
+const TextArea = styled.textarea`
+  background: #f2f2f2;
+  height: 144px;
+  border-radius: 8px;
+  padding: 16px;
+  box-sizing: border-box;
+  color: #0e1014;
   font-size: 18px;
-  font-weight: 800;
-  padding: 0;
-  color: #000000;
-  @media screen and (max-width: 768px) {
-    font-size: 16px;
-  }
-`;
+  border: none;
+  width: 100%;
+  font-family: "Inter", sans-serif; /* Set font family to Inter */
 
-const Paragraph = styled.p`
-  font-size: 18px;
-  font-weight: 400;
-  padding: 0;
-  color: #555c67;
-  @media screen and (max-width: 768px) {
-    font-size: 16px;
+  &::placeholder {
+    color: #0e1014; /* Change placeholder color */
+  }
+
+  @media screen and (min-width: 769px) {
+    flex-basis: calc(50% - 12px); /* half width with 24px gap in between */
   }
 `;
 
 const Image = styled.img`
+  width: 600px;
+  height: 456px;
   max-width: 100%;
   max-height: 100%;
-  height: auto;
-  width: 100%;
+  @media screen and (max-width: 800px) {
+    width: 300px;
+    height: 228px;
+    display:none;
+  }
 `;
 
-const OurProductsPage = () => {
+const Button = styled.button`
+  background: #000;
+  color: #fff;
+  border-radius: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 40px;
+  font-size: 15px;
+  letter-spacing: 0.5%;
+  width: 121px;
+  cursor: pointer;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+const Divider = styled.div`
+  height: 1px;
+  width: 100%;
+  background: #d9d9d9;
+`;
+
+const ContactUsPage = () => {
   return (
     <Section>
-      <Container>
+      <ContainerDiv>
         <Row>
-          <Col7>
-            <Image src={diagram} alt='data-diagram'/>
-          </Col7>
+          <Col6>
+            <Heading>CONNECT WITH OUR TEAM</Heading>
+            <form style={{ paddingTop: "32px" }}>
+              <div style={{ display: "flex", gap: "24px" }}>
+                <InputField placeholder="Your name" />
+                <InputField placeholder="Email address" />
+              </div>
+              <div style={{ paddingTop: "24px" }}>
+                <InputField placeholder="Phone number" />
+              </div>
+              <div style={{ paddingTop: "24px" }}>
+                <TextArea placeholder="Your message" />
+              </div>
+              <div style={{ paddingTop: "24px" }}>
+                <Button>{"Submit"}</Button>
+              </div>
+            </form>
+          </Col6>
+          <Col6>
+            <Image src={contactus} alt="Contact-us" />
+          </Col6>
         </Row>
         <Row>
-          <Heading>{"OUR PRODUCTS"}</Heading>
+          <Col12>
+            <Divider />
+          </Col12>
         </Row>
-        {data.map((item, index) => (
-          <Row key={index}>
-            {index % 2 === 0 ? (
-              <>
-                <Col7>
-                  <Heading1>{"SmartSync"}</Heading1>
-                  <SubHeading>
-                    <b>{item.subheading}</b>
-                  </SubHeading>
-                  <Paragraph>{item.paragrapgh}</Paragraph>
-                </Col7>
-                <Col5>
-                  <ResponsiveSVG>
-                    <svg
-                      viewBox="0 0 493 432"
-                      fill="none"
-                      preserveAspectRatio="xMidYMid meet"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M400.292 0H20C8.95431 0 0 8.95429 0 20V524C0 535.046 8.9543 544 20 544H473C484.046 544 493 535.046 493 524V92.2809C493 84.8227 490.024 77.6727 484.733 72.4165L420.025 8.13552C414.779 2.92458 407.686 0 400.292 0Z"
-                        fill="#E8F0F6"
-                      />
-                      <image
-                        href={product1}
-                        x={(493 - 429) / 2}
-                        y={(432 - 300) / 2}
-                        width="429"
-                        height="300"
-                      />
-                    </svg>
-                  </ResponsiveSVG>
-                </Col5>
-              </>
-            ) : (
-              <>
-                <Col5>
-                  <ResponsiveSVG>
-                    <svg
-                      viewBox="0 0 493 432"
-                      fill="none"
-                      preserveAspectRatio="xMidYMid meet"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M400.292 0H20C8.95431 0 0 8.95429 0 20V524C0 535.046 8.9543 544 20 544H473C484.046 544 493 535.046 493 524V92.2809C493 84.8227 490.024 77.6727 484.733 72.4165L420.025 8.13552C414.779 2.92458 407.686 0 400.292 0Z"
-                        fill="#E8F0F6"
-                      />
-                      <image
-                        href={product1}
-                        x={(493 - 429) / 2}
-                        y={(432 - 300) / 2}
-                        width="429"
-                        height="300"
-                      />
-                    </svg>
-                  </ResponsiveSVG>
-                </Col5>
-                <Col7>
-                  <Heading1>{"SmartSync"}</Heading1>
-                  <SubHeading>
-                    <b>{item.subheading}</b>
-                  </SubHeading>
-                  <Paragraph>{item.paragrapgh}</Paragraph>
-                </Col7>
-              </>
-            )}
-          </Row>
-        ))}
-      </Container>
+        <Row>
+          <Heading>{"CONTACT"}</Heading>
+        </Row>
+        <Row>
+          <Col4>
+            {"Virtuosoft Technologies Private Limited,"}
+            <br />
+            {"ABE#2, Thejaswini Annexe,"}
+            <br />
+            {"Technopark Phase 1,Trivandrum, Kerala"}
+          </Col4>
+          {/* <Col1/> */}
+          <Col3>
+            {"Email"}
+            <br />
+            {"contactus@virtuosoft.in​"}
+          </Col3>
+          {/* <Col1/> */}
+          <Col3>
+            {"Linkedin"}
+            <br />
+            {"Facebook"}
+          </Col3>
+        </Row>
+        <Row>
+          {/* <Col4>
+          {'CONTACT'}
+          </Col4> */}
+        </Row>
+        <Row>
+          <Col12>
+            <img
+              src={contactmap}
+              alt="virtuosoft-map"
+              style={{
+                maxWidth: "100%",
+                maxHeight: "100%",
+                height: "505px",
+                width: "100%",
+              }}
+            />
+          </Col12>
+        </Row>
+      </ContainerDiv>
     </Section>
   );
 };
 
-export default OurProductsPage;
+export default ContactUsPage;

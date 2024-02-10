@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 import { data } from "../../Components/OurProducts/contents";
 import product1 from "../../Assets/product1.png";
-import diagram from '../../Assets/diagram.png';
+import product2 from "../../Assets/product2.png";
+import product3 from "../../Assets/product3.png";
+import diagram from "../../Assets/diagram.png";
 
 const Section = styled.div`
   padding-left: 100px;
@@ -31,15 +34,24 @@ const Row = styled.div`
   gap: 40px;
   box-sizing: border-box;
   width: 100%;
+  padding-bottom: 100px;
 `;
 
-const Col7 = styled.div`
+const Col6 = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
   @media screen and (max-width: 768px) {
     flex: 0 0 100%;
-    width:100%;
+    width: 100%;
+  }
+`;
+
+const Col1 = styled.div`
+  flex: 0 0 calc(100% / 12); // Assuming you're using a 12-column grid system
+  width: calc(100% / 12);
+  @media screen and (max-width: 768px) {
+    display: none; // Hide on smaller screens
   }
 `;
 
@@ -49,7 +61,7 @@ const Col5 = styled.div`
   flex-direction: column;
   @media screen and (max-width: 768px) {
     flex: 0 0 100%;
-    width:100%;
+    width: 100%;
   }
 `;
 
@@ -69,29 +81,33 @@ const ResponsiveSVG = styled.div`
   }
 `;
 
-const Heading = styled.h5`
+const Heading = styled.div`
+  padding-top: 80px;
+  padding-bottom: 40px;
   font-size: 31px;
-  color: #000000;
+  font-weight: 500;
+  color: #0e1014;
   @media screen and (max-width: 768px) {
     font-size: 24px;
   }
 `;
 
-const Heading1 = styled.h5`
+const Heading1 = styled.div`
   font-size: 31px;
   font-weight: 400;
-  padding: 0;
-  color: #000000;
+  line-height: 34px;
+  color: #0e1014;
   @media screen and (max-width: 768px) {
     font-size: 24px;
   }
 `;
 
-const SubHeading = styled.p`
+const SubHeading = styled.div`
   font-size: 18px;
-  font-weight: 800;
-  padding: 0;
-  color: #000000;
+  font-weight: 400;
+  line-height: 32px;
+  padding-top: 6px;
+  color: #0e1014;
   @media screen and (max-width: 768px) {
     font-size: 16px;
   }
@@ -101,6 +117,7 @@ const Paragraph = styled.p`
   font-size: 18px;
   font-weight: 400;
   padding: 0;
+  line-height: 32px;
   color: #555c67;
   @media screen and (max-width: 768px) {
     font-size: 16px;
@@ -119,42 +136,57 @@ const OurProductsPage = () => {
     <Section>
       <Container>
         <Row>
-          <Col7>
-            <Image src={diagram} alt='data-diagram'/>
-          </Col7>
+          <Col6>
+            <Image src={diagram} alt="data-diagram" />
+          </Col6>
         </Row>
-        <Row>
-          <Heading>{"OUR PRODUCTS"}</Heading>
-        </Row>
+        {/* <Row> */}
+        <Heading>{"OUR PRODUCTS"}</Heading>
+        {/* </Row> */}
         {data.map((item, index) => (
           <Row key={index}>
             {index % 2 === 0 ? (
               <>
-                <Col7>
+                <Col6>
                   <Heading1>{"SmartSync"}</Heading1>
                   <SubHeading>
                     <b>{item.subheading}</b>
                   </SubHeading>
                   <Paragraph>{item.paragrapgh}</Paragraph>
-                </Col7>
+                </Col6>
+                <Col1 /> {/* Spacer */}
                 <Col5>
                   <ResponsiveSVG>
                     <svg
+                      width="493"
+                      height="432"
                       viewBox="0 0 493 432"
                       fill="none"
-                      preserveAspectRatio="xMidYMid meet"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M400.292 0H20C8.95431 0 0 8.95429 0 20V524C0 535.046 8.9543 544 20 544H473C484.046 544 493 535.046 493 524V92.2809C493 84.8227 490.024 77.6727 484.733 72.4165L420.025 8.13552C414.779 2.92458 407.686 0 400.292 0Z"
-                        fill="#E8F0F6"
+                        d="M402.121 0H20C8.95431 0 0 8.95431 0 20V412C0 423.046 8.9543 432 20 432H473C484.046 432 493 423.046 493 412V77.6038C493 69.0309 489.073 60.9304 482.342 55.6207L419.463 6.01686C414.522 2.11958 408.413 0 402.121 0Z"
+                        fill={`${item.color}`}
                       />
-                      <image
-                        href={product1}
-                        x={(493 - 429) / 2}
-                        y={(432 - 300) / 2}
+
+                      <motion.image
+                        href={
+                          item.id === 1
+                            ? product1
+                            : item.id === 2
+                            ? product2
+                            : item.id === 3
+                            ? product3
+                            : product1
+                        }
+                        x={(493 - 429) / 2} // Calculate the x position to center align
+                        y={(544 - 300) / 2} // Calculate the y position to center align
                         width="429"
                         height="300"
+                        initial={{ opacity: 0, y: 0, x: 60 }}
+                        animate={{ opacity: 1, y: 0, x: 0 }}
+                        exit={{ opacity: 0, y: 0, x: 0 }}
+                        transition={{ duration: 0.25 }}
                       />
                     </svg>
                   </ResponsiveSVG>
@@ -165,32 +197,46 @@ const OurProductsPage = () => {
                 <Col5>
                   <ResponsiveSVG>
                     <svg
+                      width="493"
+                      height="432"
                       viewBox="0 0 493 432"
                       fill="none"
-                      preserveAspectRatio="xMidYMid meet"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M400.292 0H20C8.95431 0 0 8.95429 0 20V524C0 535.046 8.9543 544 20 544H473C484.046 544 493 535.046 493 524V92.2809C493 84.8227 490.024 77.6727 484.733 72.4165L420.025 8.13552C414.779 2.92458 407.686 0 400.292 0Z"
-                        fill="#E8F0F6"
+                        d="M402.121 0H20C8.95431 0 0 8.95431 0 20V412C0 423.046 8.9543 432 20 432H473C484.046 432 493 423.046 493 412V77.6038C493 69.0309 489.073 60.9304 482.342 55.6207L419.463 6.01686C414.522 2.11958 408.413 0 402.121 0Z"
+                        fill={`${item.color}`}
                       />
-                      <image
-                        href={product1}
-                        x={(493 - 429) / 2}
-                        y={(432 - 300) / 2}
+                      <motion.image
+                        href={
+                          item.id === 1
+                            ? product1
+                            : item.id === 2
+                            ? product2
+                            : item.id === 3
+                            ? product3
+                            : product1
+                        }
+                        x={(493 - 429) / 2} // Calculate the x position to center align
+                        y={(544 - 300) / 2} // Calculate the y position to center align
                         width="429"
                         height="300"
+                        initial={{ opacity: 0, y: 0, x: 60 }}
+                        animate={{ opacity: 1, y: 0, x: 0 }}
+                        exit={{ opacity: 0, y: 0, x: 0 }}
+                        transition={{ duration: 0.25 }}
                       />
                     </svg>
                   </ResponsiveSVG>
                 </Col5>
-                <Col7>
+                <Col1 /> {/* Spacer */}
+                <Col6>
                   <Heading1>{"SmartSync"}</Heading1>
                   <SubHeading>
                     <b>{item.subheading}</b>
                   </SubHeading>
                   <Paragraph>{item.paragrapgh}</Paragraph>
-                </Col7>
+                </Col6>
               </>
             )}
           </Row>

@@ -19,7 +19,7 @@ const Section = styled.div`
 const Container = styled.div`
   box-sizing: border-box;
   max-width: 100%;
-  padding-top: 100px;
+  padding-top: 80px;
   @media screen and (max-width: 768px) {
     padding-top: 70px;
   }
@@ -57,9 +57,10 @@ const Col10 = styled.div`
   flex: 0 0 calc((10 / 12) * 100% - (40px * (7 / 12)));
   max-width: calc((10 / 12) * 100% - (40px * (7 / 12)));
   display: block;
-  font-size: 40px;
+  font-size: 35px;
   font-weight: 400;
   line-height: 56.2px;
+  color:#0E1014;
   
   @media screen and (max-width: 768px) {
     flex: 0 0 100%;
@@ -71,7 +72,7 @@ const Col10 = styled.div`
 
 const Image1 = styled.img`
 width : 100%;
-height : 404px;
+height : 415px;
 max-width:100%;
 max-height:100%;
 @media screen and (max-width: 768px) {
@@ -81,7 +82,7 @@ max-height:100%;
 
 const Image2 = styled.img`
 width : 100%;
-height : 404px;
+height : 415px;
 max-width:100%;
 max-height:100%;
 @media screen and (max-width: 768px) {
@@ -89,12 +90,14 @@ height : 202px;
 }
 `;
 
-const Heading = styled.h6`
-font-size: 31px;
+const Heading = styled.div`
+font-size: 28px;
 font-weight: 500;
 line-height: 34.1px;
+padding-top:100px;
+color:#0E1014;
 @media screen and (max-width: 768px) {
-    font-size: 31px;
+    font-size: 14px;
     }
 `;
 

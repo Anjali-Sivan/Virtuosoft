@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import logo from "../../Assets/Logo/virtuosoft-logo-2x.png";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 // Styled component for the navbar container
 const NavbarContainer = styled.nav`
@@ -124,7 +125,7 @@ const Navbar = () => {
           <Link href="/">Home</Link>
         </NavLink>
         <NavLink>
-          <Link href="/about">About</Link>
+          <Link href="/about-us">About</Link>
         </NavLink>
         <NavLink>
           <Link href="/services">Services</Link>
@@ -136,7 +137,7 @@ const Navbar = () => {
           <Link href="/achievements">Achievements</Link>
         </NavLink>
       </NavLinks>
-      <ContactLink as="a" href="/contact">
+      <ContactLink as="a" href="/contact-us">
         Contact us
       </ContactLink>
       <Burger onClick={() => setIsOpen(!isOpen)}>
